@@ -17,10 +17,17 @@ a{
     color: white;
 } */
 
+body{
+  min-height: 100%;
+}
 .mycss{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    right: 0;
+    top: 0;
     background:#1d1e22;
     color:#fff;
-    min-height: 1400px;
 }
 .mycss a{
     color:#99a;
