@@ -19,7 +19,8 @@ a{
 
 .mycss{
     background:#1d1e22;
-    color:#fff
+    color:#fff;
+    min-height: 1400px;
 }
 .mycss a{
     color:#99a;
