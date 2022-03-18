@@ -20,7 +20,7 @@ a{
 body{
   min-height: 100%;
 }
-.mycss{
+.css{
     position: absolute;
     height: 100%;
     width: 100%;
@@ -29,9 +29,9 @@ body{
     background:#1d1e22;
     color:#fff;
 }
-.mycss a{
+.css a{
     color:#99a;
 }
-.mycss .btn{
+.css .btn{
     color: white;
 }
