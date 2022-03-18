@@ -1,8 +1,8 @@
 # Resources
 Exemple d'utilisation de css/codepen.css :
-- remplacer raw.githubusercontent.com par cdn.jsdelivr.net/gh
-- retirer le nom de la branche après Resources (ci-dessous: main)
-- ajouter .min avant .css pour obtenir le fichier minifié
+- remplacer "raw.githubusercontent.com" par "cdn.jsdelivr.net/gh"
+- retirer le nom de la branche après "Resources" (ci-dessous: "main")
+- ajouter ".min" avant ".css" pour obtenir le fichier minifié
 https://raw.githubusercontent.com/CedricBeausseron/Resources/main/css/codepen.scss
 https://cdn.jsdelivr.net/gh/CedricBeausseron/Resources/css/codepen.min.css
 
