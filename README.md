@@ -12,4 +12,3 @@ Il faut attendre un certain temps avant que les liens se mettent à jour !
 # Todo
 - Convertir les fichiers scss en css
 - Si possible minifier les fichiers pour ne pas à passer pas le minifier de jsdelivr
-- Ajouter un fichier .gitignore et ignorer l'envoi des fichiers scss
