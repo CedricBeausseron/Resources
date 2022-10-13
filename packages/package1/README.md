@@ -1,5 +1,5 @@
 # Package 1
-THIS PACKAGE IS NOT FINISHED YES
+THIS PACKAGE IS NOT FINISHED YET
 
 This package copies files from an "src" folder into a "public" folder.
 It uses NPM and Gulp.
