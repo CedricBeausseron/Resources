@@ -5,8 +5,8 @@ This package copies files from an "src" folder into a "public" folder.
 It uses NPM and Gulp.
 Currently 6 errors are shown by node, but they are not relevant.
 
-Start using with the command
-### gulp
+### Start using with the command
+- gulp
 
 Note : Use "gulp something" to use the below commands
 
