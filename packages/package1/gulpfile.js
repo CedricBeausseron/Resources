@@ -8,7 +8,7 @@ const
     sass = require('gulp-sass')(require('sass')),
     print = require('gulp-print').default;
 
-//empty path or folder : "./"
+//empty path or folder : "."
 let publicFolderName = "public";
 let privateFolderName = "src";
 
@@ -96,11 +96,12 @@ watchImg = () => {
 
 //Did you forget to signal async completion?
 //Tenter avec series(a, b)
-copy = () => {
+copy = (done) => {
     copyHtml();
     copyCss();
     copyJs();
     copyImg();
+    done();
 }
 exports.copy = copy;
 
@@ -125,5 +126,6 @@ defaultFunction = () => {
     watchHtml();
     watchCss();
     watchJs();
+    watchImg();
 }
 exports.default = defaultFunction;

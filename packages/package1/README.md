@@ -38,3 +38,6 @@ All files from the "img" are copied in the public order
 ## Other functions
 ### del
 Delete the public folder. It's mostly usefull when you change the gulpfile but creates undesired folders or files
+
+## Related questions
+https://stackoverflow.com/questions/74066882/async-completion-error-when-function-called-or-callback-not-a-function-when-cal
