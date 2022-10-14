@@ -2,6 +2,7 @@
 This package copies files from an "src" folder into a "public" folder.
 It uses NPM and Gulp.
 Currently 6 errors are shown by node, but they are not relevant.
+The src provided is just an example of the structure used. You can delete it.
 
 ### Install the package with
 - npm i
