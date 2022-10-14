@@ -8,62 +8,119 @@ const
     sass = require('gulp-sass')(require('sass')),
     print = require('gulp-print').default;
 
+//empty path or folder : "./"
+let publicFolderName = "public";
+let privateFolderName = "src";
+
+let watchedHtml = [
+    privateFolderName + "/*.html",
+    privateFolderName + "/**/*.html"
+];
+
+let watchedCss = [
+    privateFolderName + "/assets/css/*.scss",
+    privateFolderName + "/assets/css/**/*.scss",
+    privateFolderName + "/assets/css/*.css",
+    privateFolderName + "/assets/css/**/*.css",
+];
+let publicCssFolderPath = publicFolderName + "/assets/css";
+let minCssName = "style.min.css";
+
+let watchedJs = [
+    privateFolderName + "/assets/js/*.js",
+    privateFolderName + "/assets/js/**/*.js",
+];
+let publicJsFolderPath = publicFolderName + "/assets/js";
+let minJsName = "functions.min.js";
+
+let watchedImg = [
+    privateFolderName + "/assets/img/*",
+    privateFolderName + "/assets/img/**/*"
+]
+let publicImgFolderPath = publicFolderName + "/assets/img";
+
 browsersyncServe = () => {
     bs.init({
         notify : false,
-        server : './public'
+        server : './'+publicFolderName
     });
 }
+exports.browsersyncServe = browsersyncServe;
 
 browsersyncReload = (done) => {
     bs.reload();
     done();
 }
 
+copyHtml = () => {
+    return src(watchedHtml)
+    .pipe(dest(publicFolderName));
+}
+exports.copyHtml = copyHtml;
+watchHtml = () => {
+    watch(watchedHtml, series(copyHtml,browsersyncReload));
+}
+
+copyCss = () => {
+    return src(watchedCss)
+    .pipe(sass({outputStyle: "compressed"}).on('error', sass.logError))
+    .pipe(concat(minCssName)) 
+    .pipe(dest(publicCssFolderPath));
+}
+exports.copyCss = copyCss;
+watchCss = () => {
+    watch(watchedCss, series(copyCss,browsersyncReload));
+}
+
 copyJs = () => {
-    return src('js/*.js')
-    .pipe(concat('functions.min.js')) 
+    return src(watchedJs)
+    .pipe(concat(minJsName)) 
     .pipe(terser({
         toplevel: true
     }))
-    .pipe(dest('public'));
+    .pipe(dest(publicJsFolderPath));
 }
 exports.copyJs = copyJs;
-copyCss = () => {
-    return src('*.scss')
-    .pipe(src('*.css'))
-    .pipe(sass({outputStyle: "compressed"}).on('error', sass.logError))
-    .pipe(concat('style.min.css')) 
-    .pipe(dest('public'));
-}
-exports.copyCss = copyCss;
-copyHtml = () => {
-    return src('*.html')
-    .pipe(dest('./public'));
-}
-exports.copyHtml = copyHtml;
-
-watchCss = () => {
-    watch(['*.scss', '*.css'], series(copyCss,browsersyncReload));
-}
-watchHtml = () => {
-    watch('*.html', series(copyHtml,browsersyncReload));
-}
 watchJs = () => {
-    watch('js/*.js', series(copyJs,browsersyncReload));
+    watch(watchedJs, series(copyJs,browsersyncReload));
 }
+
+copyImg = () => {
+    return src(watchedImg)
+    .pipe(dest(publicImgFolderPath));
+}
+exports.copyImg = copyImg;
+watchImg = () => {
+    watch(watchedImg, series(this.copyImg, browsersyncReload));
+}
+
+//Did you forget to signal async completion?
+//Tenter avec series(a, b)
+copy = () => {
+    copyHtml();
+    copyCss();
+    copyJs();
+    copyImg();
+}
+exports.copy = copy;
 
 delPublicFolder = () => {
-    return src('public', {read:false, allowEmpty:true})
+    return src(publicFolderName, {read:false, allowEmpty:true})
     .pipe(del())
     .pipe(print());
 }
 exports.del = delPublicFolder;
 
+// Todo : on gulp update : restart gulp
+// watchGulpFile = () => {
+//     watch("gulpfile.js", series());
+// }
+
 defaultFunction = () => {
     copyHtml();
     copyCss();
     copyJs();
+    copyImg();
     browsersyncServe();
     watchHtml();
     watchCss();

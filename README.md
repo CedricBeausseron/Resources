@@ -14,5 +14,5 @@ https://cdn.jsdelivr.net/gh/CedricBeausseron/Resources/css/codepen.min.css
 - Si possible minifier les fichiers pour ne pas à passer par le minifier de jsdelivr
 
 # packages json
-## A vérifier 
-récupérer le package json, et npm init pour lancer les installations
+## Important
+cd in package to use it, run npm i to install

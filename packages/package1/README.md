@@ -1,9 +1,10 @@
 # Package 1
-THIS PACKAGE IS NOT FINISHED YET
-
 This package copies files from an "src" folder into a "public" folder.
 It uses NPM and Gulp.
 Currently 6 errors are shown by node, but they are not relevant.
+
+### Install the package with
+- npm i
 
 ### Start using with the command
 - gulp
@@ -27,6 +28,11 @@ Merge all CSS and Sass Files, then compress it to make a .min.css file
 Merge all Javascript files, then compress it to make a .min.js file
 ### Related functions
 - copyJs
+
+## Images
+All files from the "img" are copied in the public order
+### Related functions
+- copyImg
 
 ## Other functions
 ### del
