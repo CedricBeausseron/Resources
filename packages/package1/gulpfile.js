@@ -114,7 +114,7 @@ exports.del = delPublicFolder;
 //     watch("gulpfile.js", series());
 // }
 
-defaultFunction = () => {
+defaultFunction = async () => {
     copy();
     browsersyncServe();
     watchHtml();

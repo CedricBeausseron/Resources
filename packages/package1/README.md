@@ -21,12 +21,12 @@ Example :
 - copyHtml
 
 ## Sass & CSS
-Merge all CSS and Sass Files, then compress it to make a .min.css file
+Merge all CSS and Sass files, then compress it to make a .min.css file
 ### Related functions
 - copyCss
 
 ## JavaScript
-Merge all Javascript files, then compress it to make a .min.js file
+Merge all JavaScript files, then compress it to make a .min.js file
 ### Related functions
 - copyJs
 

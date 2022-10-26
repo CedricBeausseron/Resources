@@ -1,42 +1,74 @@
-const { src, dest, watch } = require ('gulp');
+const { src, dest, watch, series } = require ('gulp');
 
-const 
+const
+    del = require ('gulp-clean'),
     bs = require('browser-sync').create(),
     concat = require('gulp-concat'),
-    sass = require('gulp-sass')(require('sass'))
+    sass = require('gulp-sass')(require('sass')),
+    print = require('gulp-print').default;
 
-let watchedCss = "styles.scss"
+//empty path or folder : "."
+let folderName = "src";
+
+let watchedHtml = [
+    folderName + "/*.html"
+];
+
+let minCssName = "style.min.css";
+let minCssFolderPath = folderName + "/assets/css"
+let watchedCss = [
+    folderName + "/*.scss",
+    folderName + "/*.css"
+];
+
+let watchedJs = [
+    folderName + "/*.js"
+];
 
 browsersyncServe = () => {
     bs.init({
         notify : false,
-        server : '.'
+        server : folderName
     });
 }
 exports.browsersyncServe = browsersyncServe;
 
-browsersyncReload = (done = () => {}) => {
+browsersyncReload = async () => {
     bs.reload();
-    done();
 }
-exports.browsersyncReload = browsersyncReload;
+
+watchHtml = () => {
+    watch(watchedHtml, series(browsersyncReload));
+}
 
 copyCss = () => {
     return src(watchedCss)
-    .pipe(sass().on('error', sass.logError))
-    .pipe(concat("styles.css")) 
-    .pipe(dest("."));
+    .pipe(sass({outputStyle: "compressed"}).on('error', sass.logError))
+    .pipe(concat(minCssName)) 
+    .pipe(dest(minCssFolderPath));
 }
-watchHtml = () => {
-    watch("index.html", browsersyncReload());
-}
+exports.copy = copyCss;
 watchCss = () => {
-    watch(watchedCss, browsersyncReload());
+    watch(watchedCss, series(copyCss,browsersyncReload));
 }
+
 watchJs = () => {
-    watch("functions.js", browsersyncReload());
+    watch(watchedJs, series(browsersyncReload));
 }
-defaultFunction = () => {
+
+delMinifiedCss = () => {
+    return src(minCssFolderPath + "/" + minCssName, {read:false, allowEmpty:true})
+    .pipe(del())
+    .pipe(print());
+}
+exports.del = delMinifiedCss;
+
+// Todo : on gulp update : restart gulp
+// watchGulpFile = () => {
+//     watch("gulpfile.js", series());
+// }
+
+defaultFunction = async () => {
     copyCss();
     browsersyncServe();
     watchHtml();
