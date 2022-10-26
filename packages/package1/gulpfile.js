@@ -94,14 +94,11 @@ watchImg = () => {
     watch(watchedImg, series(this.copyImg, browsersyncReload));
 }
 
-//Did you forget to signal async completion?
-//Tenter avec series(a, b)
-copy = (done) => {
+copy = async () => {
     copyHtml();
     copyCss();
     copyJs();
     copyImg();
-    done();
 }
 exports.copy = copy;
 
@@ -118,10 +115,7 @@ exports.del = delPublicFolder;
 // }
 
 defaultFunction = () => {
-    copyHtml();
-    copyCss();
-    copyJs();
-    copyImg();
+    copy();
     browsersyncServe();
     watchHtml();
     watchCss();
